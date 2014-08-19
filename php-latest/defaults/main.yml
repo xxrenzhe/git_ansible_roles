@@ -1,0 +1,16 @@
+---
+# defaults file for role-nginx-latest/
+
+# nginx version
+php_version: 'php-5.5.15'
+
+# the latest package for nginx
+php_latest_package: 'php-5.5.15.tar.gz'
+
+# package directory
+package_original_directory: /home/wenba/software/tar
+package_untar_directory: /home/wenba/software/src
+
+# nginx installed directory
+php_installed_directory: /home/wenba/php-5.5.15
+php_latest_installed_directory: /home/wenba/php

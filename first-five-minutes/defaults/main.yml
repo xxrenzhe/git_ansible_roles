@@ -1,0 +1,24 @@
+---
+# defaults file for role-first_five_minutes/
+
+# root_password for console login as root
+# default='test'
+ffm_root_password: '$6$BfMtvLgQ$J9Zv7PjceeLCAR0TNFMTh4cR8O.desbaAJ6I9J.ApE.OIJkSx0Yb2Gbsx7GoIESmpmC1AHr5rHtE2pvyhm3Nx.'
+
+# deploy group which will be used for ansible to deploy.
+# default='deploy'
+ffm_deploy_group: wenba
+# deploy user which will be used for ansible to deploy. Has sudo rights without password
+# default='deploy'
+ffm_deploy_user: wenba
+# password for the deploy user for ssh login without private key:
+# default='test'
+ffm_deploy_password: '$6$BfMtvLgQ$J9Zv7PjceeLCAR0TNFMTh4cR8O.desbaAJ6I9J.ApE.OIJkSx0Yb2Gbsx7GoIESmpmC1AHr5rHtE2pvyhm3Nx.'
+
+# defaults for logwatch.yml
+ffm_logwatch_email_title: "logwatch for {{ ansible_hostname }}"
+ffm_logwatch_email: jie.yu@wenba100.com
+
+# defaults for fail2ban.yml
+ffm_fail2ban_email_title: "fail2ban for {{ ansible_hostname }}"
+ffm_fail2ban_email: jie.yu@wenba100.com

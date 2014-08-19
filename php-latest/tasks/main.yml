@@ -1,0 +1,51 @@
+---
+# file: main.yml
+
+- name: PHP latest | Prepare PHP directory /home/wenba/php-version
+  remote_user: wenba
+  file: path={{ php_installed_directory }} owner=wenba group=wenba state=directory recurse=yes
+
+- name: PHP latest | Link PHP to latest version
+  remote_user: wenba
+  sudo: yes
+  file: src={{ php_installed_directory }} dest=/home/wenba/php owner=wenba group=wenba state=link force=yes
+
+- name: PHP latest | Copy latest PHP original package
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ php_latest_package }} dest={{ package_original_directory}}/{{ php_latest_package }} owner=wenba group=wenba mode=0644
+  
+- name: PHP latest | Untar latest PHP package
+  remote_user: wenba
+  sudo: yes
+  shell: /bin/tar zxvf {{ package_original_directory}}/{{ php_latest_package }} -C {{ package_untar_directory}}
+
+- name: PHP latest | Installed latest PHP 
+  remote_user: wenba
+  sudo: yes
+  script: php_install.sh {{ package_untar_directory }}/{{ php_version }} {{ php_latest_installed_directory }} creates={{ php_latest_installed_directory }}/bin/php
+
+- name: PHP latest | Copy configuration file php.ini
+  remote_user: wenba
+  sudo: yes
+  template: src=php.ini-production.j2 dest=/etc/php.ini owner=root group=root mode=0644
+  notify: restart php-fpm
+
+- name: PHP latest | Copy configuration file php-fpm.conf
+  remote_user: wenba
+  sudo: yes
+  copy: src=php-fpm.conf.default dest={{ php_latest_installed_directory }}/etc/php-fpm.conf owner=wenba group=wenba mode=0644
+
+- name: PHP latest | Copy init.d start script php-fpm
+  remote_user: wenba
+  sudo: yes
+  copy: src=init.d.php-fpm dest=/etc/init.d/php-fpm owner=root group=root mode=0755
+
+- name: PHP latest | Copy php.sh to /etc/profile.d/
+  remote_user: wenba
+  sudo: yes
+  copy: src=php.sh dest=/etc/profile.d/php.sh owner=root group=root mode=0644
+
+- name: PHP latest | Check service daemon
+  sudo: yes
+  service: name=php-fpm state=restarted enabled=yes

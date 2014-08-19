@@ -1,0 +1,11 @@
+remote: warning: File mysql-latest/files/MySQL-server-5.6.20-1.el6.x86_64.rpm is 52.51 MB; this is larger than GitHub's recommended maximum file size of 50 MB[K
+remote: warning: File hadoop/files/hadoop-2.4.1-src/hadoop-common-project/hadoop-common/target/hadoop-common-2.4.1-javadoc.jar is 71.74 MB; this is larger than GitHub's recommended maximum file size of 50 MB[K
+remote: warning: File hadoop/files/hadoop-2.4.1-src/hadoop-hdfs-project/hadoop-hdfs-httpfs/target/hadoop-hdfs-httpfs-2.4.1-javadoc.jar is 93.25 MB; this is larger than GitHub's recommended maximum file size of 50 MB[K
+remote: error: GH001: Large files detected.[K
+remote: error: Trace: e52944153ef9968f3cee230873c225fc[K
+remote: error: See http://git.io/iEPt8g for more information.[K
+remote: error: File hadoop/files/hadoop-2.4.1.tar.gz is 132.23 MB; this exceeds GitHub's file size limit of 100 MB[K
+remote: error: File mysql-latest/files/MySQL-5.6.20-1.el6.x86_64.rpm-bundle.tar is 209.52 MB; this exceeds GitHub's file size limit of 100 MB[K
+remote: error: File hadoop/files/hadoop-2.4.1-src/hadoop-dist/target/hadoop-2.4.1.tar.gz is 118.45 MB; this exceeds GitHub's file size limit of 100 MB[K
+remote: error: File hadoop/files/hadoop-2.4.1-src/hadoop-dist/target/hadoop-dist-2.4.1-javadoc.jar is 237.52 MB; this exceeds GitHub's file size limit of 100 MB[K
+remote: error: File hadoop/files/hadoop-2.4.1-src/hadoop-hdfs-project/hadoop-hdfs/target/hadoop-hdfs-2.4.1-javadoc.jar is 125.14 MB; this exceeds GitHub's file size limit of 100 MB[K

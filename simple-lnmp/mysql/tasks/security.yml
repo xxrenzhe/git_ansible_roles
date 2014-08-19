@@ -1,0 +1,33 @@
+---
+# File: security.yml
+# Type: task
+# Part: MySQL
+
+- name: MySQL | Update mysql root password for all root accounts 1
+  mysql_user: name=root password={{ mysql_root_password }} host={{ item }} check_implicit_admin=yes
+  with_items:
+    - localhost
+  ignore_errors: True
+- name: MySQL | Copy .my.cnf file with root password credentials to root folder
+  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+  notify:
+    - restart mysqld
+- name: MySQL | Copy .my.cnf file with root password credentials to wenba folder
+  template: src=my.cnf.j2 dest=/home/wenba/.my.cnf owner=wenba group=wenba mode=0600
+  notify:
+    - restart mysqld
+- name: MySQL | Update mysql root password for all root accounts 2
+  mysql_user: name=root password={{ mysql_root_password }} host={{ item }} check_implicit_admin=yes
+  with_items:
+    - 127.0.0.1
+    - "{{ ansible_fqdn }}"
+  ignore_errors: True
+- name: MySQL | Delete anonymous MySQL server user for localhost
+  mysql_user: name="" host={{ item }} state="absent"
+  with_items:
+    - localhost
+    - "{{ ansible_fqdn }}"
+  ignore_errors: True
+- name: MySQL | Remove test database
+  mysql_db: name=test state=absent
+  ignore_errors: True

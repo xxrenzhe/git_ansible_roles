@@ -1,0 +1,114 @@
+---
+# File: main.yml
+
+- name: Hadoop | Prepare hadoop directory /home/wenba/hadoop-version
+  remote_user: wenba
+  file: path={{ hadoop_installed_directory }} owner=wenba group=wenba state=directory recurse=yes
+
+- name: Hadoop latest | Link hadoop to latest version
+  remote_user: wenba
+  sudo: yes
+  file: src={{ hadoop_installed_directory }} dest={{ hadoop_latest_installed_directory }} owner=wenba group=wenba state=link force=yes
+
+- name: Hadoop latest | Copy latest hadoop original package
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ hadoop_latest_package }} dest={{ package_original_directory}}/{{ hadoop_latest_package }} owner=wenba group=wenba mode=0644
+  
+- name: Hadoop latest | Untar latest hadoop package
+  remote_user: wenba
+  sudo: yes
+  shell: /bin/tar zxvf {{ package_original_directory}}/{{ hadoop_latest_package }} -C {{ package_untar_directory}} creates={{ hadoop_installed_directory }}/etc/hadoop/core-site.xml
+
+- name: Hadoop latest | Install java-1.7.0-openjdk
+  remote_user: wenba
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+    - rsync
+
+- name: Hadoop latest | Ensure ssh localhost without password
+  remote_user: wenba
+  sudo: yes
+  shell: cat /home/wenba/.ssh/id_rsa.pub >> /home/wenba/.ssh/authorized_keys
+
+- name: Hadoop latest | Add useful users
+  remote_user: wenba
+  sudo: yes
+  user: name={{ item }} shell=/sbin/nologin createhome=no 
+  with_items:
+    - hdfs
+    - yarn
+    - mapred
+
+- name: Hadoop latest | Prepare hadoop directory /home/wenba/hadoop/xx
+  remote_user: wenba
+  sudo: yes
+  file: name={{ item }} owner=wenba group=wenba state=directory recurse=yes
+  with_items:
+    - "{{ hadoop_latest_installed_directory }}/pid_dir"
+    - "{{ hadoop_latest_installed_directory }}/namenode_dir"
+    - "/data/hadoop/datanode_dir"
+    - "{{ hadoop_latest_installed_directory }}/nodemanager_localdir"
+    - "{{ hadoop_latest_installed_directory }}/nodemanager_logs"
+    - "{{ hadoop_latest_installed_directory }}/hc_script"
+
+- name: Hadoop latest | Prepare hadoop jobhistory server file /home/wenba/hadoop/mr-history/xx
+  remote_user: wenba
+  sudo: yes
+  file: name={{ item }} owner=wenba group=wenba state=touch
+  with_items:
+    - "{{ hadoop_latest_installed_directory }}/mr-history/tmp"
+    - "{{ hadoop_latest_installed_directory }}/mr-history/done"
+
+- name: Hadoop latest | Copy configuration files
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ item }} dest={{ hadoop_latest_installed_directory }}/etc/hadoop/{{ item }} owner=wenba group=wenba
+  with_items:
+    - core-site.xml
+    - nodemanagerhosts.exclude
+    - hdfs-site.xml
+    - datahosts.allow
+    - mapred-site.xml
+    - yarn-site.xml
+    - nodemanagerhosts.allow
+    - slaves
+    - datahosts.exclude
+    - nodemanager_healthcheck.sh
+    - hadoop-env.sh
+    - yarn-env.sh
+    - mapred-env.sh
+
+- name: Hadoop latest | Copy configuration files
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ item }} dest=/etc/profile.d/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - hadoop-env.sh
+    - yarn-env.sh
+    - mapred-env.sh
+
+- name: Hadoop latest | Ensure initial scripts executable
+  remote_user: wenba
+  sudo: yes
+  file: name={{ hadoop_latest_installed_directory }}/etc/hadoop/{{ item }} owner=wenba group=wenba mode=0755
+  with_items:
+    - nodemanager_healthcheck.sh
+
+- name: Hadoop latest | Update native lib to 64-bit-version
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ item }} dest=/home/wenba/hadoop/lib/native/{{ item }} owner=wenba group=wenba mode=0755
+  with_items:
+    - libhadoop.a
+    - libhadooppipes.a
+    - libhadoop.so.1.0.0
+    - libhadooputils.a
+
+- name: Hadoop latest | Update native lib to 64-bit-version
+  remote_user: wenba
+  sudo: yes
+  file: src=libhadoop.so.1.0.0 dest=/home/wenba/hadoop/lib/native/libhadoop.so owner=wenba group=wenba state=link force=yes

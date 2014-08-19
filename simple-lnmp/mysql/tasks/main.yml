@@ -1,0 +1,39 @@
+---
+# File: main.yml
+# Type: task
+# Part: MySQL
+
+## Preinstall Check
+#- name: MySQL | Check for previous installation
+#  shell: "[ -f /usr/bin/mysqld_safe ]"
+#  register: mysqld_exists
+#  ignore_errors: True
+
+- name: MySQL | Check for configuration directory
+  file: path=/etc/mysql/conf.d state=directory
+
+## Install
+- name: MySQL | Install package
+  yum: name=mysql-server state={{ mysql_yum_state }}
+
+## Install ansible related packages
+- name: MySQL | Install python package
+  yum: name=MySQL-python state={{ mysql_yum_state }}
+
+## Configure
+- name: MySQL | Deploy configuration
+  template: src=mysql_my.cnf.j2 dest=/etc/my.cnf owner=root mode=0644
+  sudo: yes
+- name: MySQL | Backup configuration
+  shell: creates=/etc/my.cnf.orig cp /etc/my.cnf /etc/my.cnf.`date +%Y%m%d%H%M%S`
+
+## Check service
+- name: MySQL | Check service daemon
+  service: name=mysqld state=started
+
+## Secure installation
+- include: security.yml
+
+## Setup custom location
+- include: location.yml
+  when: "'{{ mysql_path }}' != '/var/lib/mysql'"

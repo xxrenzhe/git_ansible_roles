@@ -1,0 +1,39 @@
+---
+# file: main.yml
+
+- name: Elasticsearch-Front latest | Prepare elasticsearch_front directory /data/www/elasticsearch_front-version
+  remote_user: wenba
+  sudo: yes
+  file: path={{ elasticsearch_front_installed_directory }} owner=wenba group=wenba state=directory recurse=yes
+
+- name: Elasticsearch-Front latest | Link elasticsearch_front to latest version
+  remote_user: wenba
+  sudo: yes
+  file: src={{ elasticsearch_front_installed_directory }} dest={{ elasticsearch_front_latest_installed_directory }} owner=wenba group=wenba state=link force=yes
+
+- name: Elasticsearch-Front latest | Copy latest elasticsearch_front original package
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ elasticsearch_front_latest_package }} dest={{ package_original_directory}}/{{ elasticsearch_front_latest_package }} owner=wenba group=wenba mode=0644
+  
+- name: Elasticsearch-Front latest | Untar latest elasticsearch_front package
+  remote_user: wenba
+  sudo: yes
+  shell: /bin/tar xvf {{ package_original_directory}}/{{ elasticsearch_front_latest_package }} -C {{ package_untar_directory}} creates={{ elasticsearch_front_installed_directory }}/application/config/database.php
+
+- name: Elasticsearch-Front latest | Copy configuration file database.php
+  remote_user: wenba
+  sudo: yes
+  template: src=database.php.j2 dest={{ elasticsearch_front_latest_installed_directory }}/application/config/database.php owner=wenba group=wenba mode=0664
+
+- name: Elasticsearch-Front latest | Copy configuration file config_local.php
+  remote_user: wenba
+  sudo: yes
+  template: src=config_local.php.j2 dest={{ elasticsearch_front_latest_installed_directory }}/application/config/config_local.php owner=wenba group=wenba mode=0664
+
+- name: Elasticsearch-Front latest | Update Nginx configuration
+  remote_user: wenba
+  sudo: yes
+  copy: src=nginx.conf dest={{ nginx_latest_installed_directory }}/etc/nginx.conf owner=wenba group=wenba mode=0664
+  notify: 
+    - restart nginx

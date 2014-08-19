@@ -1,0 +1,44 @@
+# file: users.yml
+
+
+- name: users | set root root_password
+  sudo: yes
+  user: >
+    name=root
+    password="{{ ffm_root_password  }}"
+  tags: setup
+
+
+- name: users | add group wenba
+  sudo: yes
+  group: name=wenba state=present
+  tags: setup
+
+
+- name: users | add user wenba
+  sudo: yes
+  user: >
+    name={{ ffm_deploy_user }}
+    group=wenba
+    password="{{ ffm_deploy_password }}"
+    shell=/bin/bash
+    state=present
+  tags: setup
+
+
+- name: users | copy ssh pub key to deployment user
+  sudo: yes
+  authorized_key: user={{ ffm_deploy_user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" state=present
+  tags: setup
+
+
+- name: users | enable sudoers.d
+  sudo: yes
+  lineinfile: dest=/etc/sudoers regexp='^#includedir /etc/sudoers.d' line='#includedir /etc/sudoers.d' state=present
+  tags : setup
+
+
+- name: users | add deploy_user to sudoers
+  sudo: yes
+  template: src=user.j2 dest=/etc/sudoers.d/{{ ffm_deploy_user }} mode=0440
+  tags: setup

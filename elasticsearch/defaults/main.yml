@@ -1,0 +1,21 @@
+---
+# defaults file for role-elasticsearch-latest/
+
+# elasticsearch version
+elasticsearch_version: 'elasticsearch-1.2.0'
+
+# the latest package for elasticsearch
+elasticsearch_latest_package: 'elasticsearch-1.2.0.tar'
+
+# package directory
+package_original_directory: /home/wenba/software/tar
+package_untar_directory: /home/wenba/
+
+# elasticsearch installed directory
+elasticsearch_installed_directory: /home/wenba/elasticsearch-1.2.0
+elasticsearch_latest_installed_directory: /home/wenba/elasticsearch
+
+cluster_name: search01
+unicast_hosts: ["10.9.4.183","10.9.10.219","10.9.4.195","10.9.1.143","10.9.9.202"]
+
+elasticsearch_mapping_host: "search01-es05"

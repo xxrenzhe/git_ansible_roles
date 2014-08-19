@@ -1,0 +1,10 @@
+---
+# file: selinux.yml
+
+- name: selinux | Install package libselinux-python
+  sudo: yes
+  yum: name=libselinux-python state=present
+
+- name: selinux | Disable selinux 
+  sudo: yes
+  selinux: state=disabled

@@ -1,0 +1,12 @@
+---
+# file: auth.yml
+
+- name: auth | Change SSH port
+  sudo: yes
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^#Port 22" line="Port 9922" state=present
+  notify: restart ssh
+
+- name: auth | Disallow root SSH access
+  sudo: yes
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
+  notify: restart ssh

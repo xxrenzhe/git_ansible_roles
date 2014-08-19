@@ -1,0 +1,17 @@
+---
+# file: package_directory.yml
+
+- name: package_directory | directory /home/wenba/software
+  remote_user: wenba
+  sudo: yes
+  file: path=/home/wenba/software owner=wenba group=wenba mode=0755 state=directory
+
+- name: package_directory | directory /home/wenba/software/tar
+  remote_user: wenba
+  sudo: yes
+  file: path=/home/wenba/software/tar owner=wenba group=wenba mode=0755 state=directory
+
+- name: package_directory | directory /home/wenba/software/src
+  remote_user: wenba
+  sudo: yes
+  file: path=/home/wenba/software/src owner=wenba group=wenba mode=0755 state=directory

@@ -1,0 +1,7 @@
+---
+# File: main.yml
+#
+- name: itop | Add Nginx configuration
+  copy: src=itop.conf dest=/etc/nginx/conf.d/itop.conf owner=root group=root mode=0644
+- name: itop | Change nginx document_root permission
+  file: path=/usr/share/nginx/html/ owner=wenba group=wenba state=directory recurse=yes

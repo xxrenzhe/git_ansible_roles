@@ -1,0 +1,10 @@
+---
+# file: sudo_vim.yml
+
+- name: sudo_vim | backup original vi
+  sudo: yes
+  command: /bin/mv /bin/vi /bin/vi.bak creates=/bin/vi.bak
+
+- name: sudo_vim | alias vi to vim under sudo environment
+  sudo: yes
+  file: src=/usr/bin/vim dest=/bin/vi state=link owner=root group=root

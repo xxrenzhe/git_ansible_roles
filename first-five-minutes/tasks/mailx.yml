@@ -1,0 +1,13 @@
+---
+# file: mailx.yml
+- name: mailx | install mailx as a "mail client"
+  sudo: yes
+  yum: name=mailx state=present 
+
+- name: mailx | copy the configuration file mail.rc
+  sudo: yes
+  copy: src=mail.rc dest=/etc/mail.rc owner=wenba group=wenba mode=0644
+
+- name: mailx | test ok
+  sudo: yes
+  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test12" jie.yu@wenba100.com &>/dev/null

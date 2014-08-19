@@ -1,0 +1,8 @@
+---
+# File: main.yml
+# # Type: handler
+# # Part: Php-fpm
+
+- name: restart php-fpm
+  sudo: yes
+  service: name=php-fpm state=restarted

@@ -1,0 +1,18 @@
+---
+# File: location.yml
+# Type: task
+# Part: MySQL
+
+
+## Setup custom location
+- name: MySQL | Setup directory
+  sudo: yes
+  file: state=directory dest={{ mysql_path }} mode=2700 owner={{ mysql_user }} group={{ mysql_group }}
+- name: MySQL | Move databases
+  sudo: yes
+  shell: service mysqld stop; cp -rf /var/lib/mysql/* {{ mysql_path }}; touch {{ mysql_path }}/.ansible; chown -R {{ mysql_user }}:{{ mysql_group }} {{ mysql_path }}; rm -rf /var/lib/mysql
+    creates={{ mysql_path }}/.ansible
+- name: MySQL | Link databases
+  sudo: yes
+  action: file state=link src={{ mysql_path }} path=/var/lib/mysql force=yes
+  notify: restart mysqld

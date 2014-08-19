@@ -1,0 +1,18 @@
+---
+# defaults file for role-nginx-latest/
+
+# nginx version
+nginx_version: 'nginx-1.6.0'
+
+# the latest package for nginx
+nginx_latest_package: 'nginx-1.6.0.tar.gz'
+
+# package directory
+package_original_directory: /home/wenba/software/tar
+package_untar_directory: /home/wenba/software/src
+
+# nginx installed directory
+nginx_installed_directory: /home/wenba/nginx-1.6.0
+nginx_latest_installed_directory: /home/wenba/nginx
+
+nginx_user: wenba

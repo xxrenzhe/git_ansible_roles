@@ -1,0 +1,30 @@
+---
+# defaults file for role-elasticsearch-front-latest/
+
+# elasticsearch_front version
+elasticsearch_front_version: 'search140807'
+
+# the latest package for elasticsearch_front
+elasticsearch_front_latest_package: 'search140807.tar'
+
+# package directory
+package_original_directory: /home/wenba/software/tar
+package_untar_directory: /data/www
+
+# elasticsearch_front installed directory
+elasticsearch_front_installed_directory: /data/www/search140807
+elasticsearch_front_latest_installed_directory: /data/www/search
+
+active_group: question_bank
+db_hostname: 10.2.1.5
+db_username: timuUser
+db_password: wenba2012
+db_database: question_bank_clean0620
+
+es1: search01-es01
+es2: search01-es02
+es3: search01-es03
+es4: search01-es04
+es5: search01-es05
+
+nginx_latest_installed_directory: /home/wenba/nginx

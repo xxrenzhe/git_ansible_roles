@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Frederic Tschannen
+  description: First five minutes on a server
+  license: MIT
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - quantal
+        - raring
+        - saucy
+        - trusty
+  categories:
+  - packaging
+  - system
+dependencies: []
