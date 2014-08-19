@@ -5,7 +5,7 @@
 elasticsearch_front_version: 'search140807'
 
 # the latest package for elasticsearch_front
-elasticsearch_front_latest_package: 'search140807.tar'
+elasticsearch_front_latest_package: 'xxoo'
 
 # package directory
 package_original_directory: /home/wenba/software/tar
@@ -15,11 +15,11 @@ package_untar_directory: /data/www
 elasticsearch_front_installed_directory: /data/www/search140807
 elasticsearch_front_latest_installed_directory: /data/www/search
 
-active_group: question_bank
-db_hostname: 10.2.1.5
-db_username: timuUser
-db_password: wenba2012
-db_database: question_bank_clean0620
+active_group: xx
+db_hostname: xx.xx.xx.xx
+db_username: xx
+db_password: xx
+db_database: xx
 
 es1: search01-es01
 es2: search01-es02

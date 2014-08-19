@@ -16,6 +16,6 @@ elasticsearch_installed_directory: /home/wenba/elasticsearch-1.2.0
 elasticsearch_latest_installed_directory: /home/wenba/elasticsearch
 
 cluster_name: search01
-unicast_hosts: ["10.9.4.183","10.9.10.219","10.9.4.195","10.9.1.143","10.9.9.202"]
+unicast_hosts: ["","","","",""]
 
 elasticsearch_mapping_host: "search01-es05"
