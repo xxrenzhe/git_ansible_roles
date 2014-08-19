@@ -4,7 +4,3 @@
 - name: iptables | Ensure iptables stopped
   sudo: yes
   service: name=iptables state=stopped
-
-- name: iptables | Copy the configuration file iptables
-  sudo: yes
-  copy: src=iptables dest=/etc/sysconfig/iptables owner=root group=root mode=0600
