@@ -5,20 +5,3 @@
   sudo: yes
   yum: name=fail2ban state=absent
   ignore_errors: yes
-
-#- name: fail2ban | Copy the configuration file jail.conf
-#  sudo: yes
-#  template: src=jail.j2 dest=/etc/fail2ban/jail.conf owner=root group=root mode=0644
-#
-#- name: fail2ban | modify the mail client for test
-#  sudo: yes
-#  replace: dest=/etc/fail2ban/action.d/sendmail-whois.conf regexp='/usr/sbin/sendmail.*' replace='/bin/mailx -A fail2ban -s "{{ ffm_fail2ban_email_title }}" <dest> &>/dev/null'
-#
-#- name: fail2ban | modify the mail client for test2
-#  sudo: yes
-#  replace: dest=/etc/fail2ban/action.d/{{ item }} regexp='/usr/sbin/sendmail.*' replace='/bin/mailx -A zabbix -s "{{ ffm_fail2ban_email_title }}" <dest> &>/dev/null'
-#  with_items:
-#    - sendmail-whois.conf
-#    - sendmail-buffered.conf
-#    - sendmail.conf
-#    - sendmail-whois-lines.conf

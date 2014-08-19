@@ -10,4 +10,4 @@
 
 - name: mailx | test ok
   sudo: yes
-  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test12" jie.yu@wenba100.com &>/dev/null
+  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test12" xx@oo &>/dev/null
