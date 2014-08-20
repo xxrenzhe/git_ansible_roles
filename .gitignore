@@ -55,7 +55,7 @@ docs/_build/
 # personal information
 elasticsearch/defaults/*.yml
 elasticsearch-front/defaults/*.yml
-first-five-minutes/defaults/*.yml
+/first-five-minutes/defaults/*.yml
 hadoop/defaults/*.yml
 itop/defaults/*.yml
 mysql-latest/defaults/*.yml
