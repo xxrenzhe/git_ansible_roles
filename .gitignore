@@ -53,7 +53,7 @@ coverage.xml
 docs/_build/
 
 # personal information
-*/defaults/*.yml
+**/defaults/*.yml
 
 #elasticsearch/defaults/*.yml
 #elasticsearch-front/defaults/*.yml
