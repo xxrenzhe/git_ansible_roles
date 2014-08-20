@@ -13,7 +13,7 @@
 - include: selinux.yml
 - include: system.yml
 - include: network.yml
-  when: {{ ansible_default_ipv4.network }} == "10.9.*.*" and {{ outer_ip }} == "no"
+  when: ansible_default_ipv4.network == "10.9.*.*" and outer_ip == "no"
 - include: updates.yml
 - include: users.yml
 - include: package_directory.yml
