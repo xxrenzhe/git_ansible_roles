@@ -1,6 +1,9 @@
 ---
 # defaults file for role-first_five_minutes/
 
+# configure outer ip address or not
+outer_ip: no
+
 # root_password for console login as root
 # default='test'
 ffm_root_password: 'xxoo'
