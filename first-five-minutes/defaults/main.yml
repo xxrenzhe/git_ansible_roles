@@ -25,3 +25,4 @@ ffm_logwatch_email: xx@oo
 # defaults for fail2ban.yml
 ffm_fail2ban_email_title: "fail2ban for {{ ansible_hostname }}"
 ffm_fail2ban_email: xx@oo
+====
