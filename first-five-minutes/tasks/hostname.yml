@@ -1,5 +1,0 @@
----
-# file: hostname.yml
-- name: hostname | Change hostname
-  sudo: yes
-  hostname: name={{ inventory_hostname }}

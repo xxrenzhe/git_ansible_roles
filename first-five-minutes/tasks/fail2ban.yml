@@ -1,7 +1,0 @@
----
-# file: fail2ban.yml
-
-- name: fail2ban | Install fail2ban
-  sudo: yes
-  yum: name=fail2ban state=absent
-  ignore_errors: yes
