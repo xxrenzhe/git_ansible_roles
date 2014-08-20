@@ -21,4 +21,4 @@ mysql_path: "/data/mysql"
 
 # Extra configuration
 mysql_max_allowed_packet: "128M"
-mysql_root_password: GeneticLifeformAndDiskOperatingSystem
+mysql_root_password: xxoo
