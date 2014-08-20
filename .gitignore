@@ -53,7 +53,10 @@ coverage.xml
 docs/_build/
 
 # personal information
-**/defaults/*.yml
+*/defaults/*.yml
+simple-lnmp/mysql/defaults/*.yml
+simple-lnmp/nginx/defaults/*.yml
+simple-lnmp/php5/defaults/*.yml
 
 #elasticsearch/defaults/*.yml
 #elasticsearch-front/defaults/*.yml
