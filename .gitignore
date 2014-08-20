@@ -54,19 +54,4 @@ docs/_build/
 
 # personal information
 */defaults/*.yml
-simple-lnmp/mysql/defaults/*.yml
-simple-lnmp/nginx/defaults/*.yml
-simple-lnmp/php5/defaults/*.yml
-
-#elasticsearch/defaults/*.yml
-#elasticsearch-front/defaults/*.yml
-#/first-five-minutes/defaults/*.yml
-#hadoop/defaults/*.yml
-#itop/defaults/*.yml
-#mysql-latest/defaults/*.yml
-#nginx-latest/defaults/*.yml
-#php-latest/defaults/*.yml
-#simple-lnmp/mysql/defaults/*.yml
-#simple-lnmp/nginx/defaults/*.yml
-#simple-lnmp/php5/defaults/*.yml
-#zabbix-agent-2.2/defaults/*.yml
+*/*/defaults/*.yml

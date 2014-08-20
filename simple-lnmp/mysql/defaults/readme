@@ -1,0 +1,3 @@
+# Under directory defaults,there should be a file main.yml to define variables used in tasks
+# such as
+nginx_version: 'nginx-1.6.0'
