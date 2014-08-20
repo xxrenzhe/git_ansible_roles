@@ -1,4 +1,0 @@
----
-# vars file for role-first_five_minutes/
-
-pwd: "{{ lookup('env','PWD') }}"

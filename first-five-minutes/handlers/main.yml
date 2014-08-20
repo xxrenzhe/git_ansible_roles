@@ -1,9 +1,0 @@
----
-# handlers file for role-first_five_minutes/
-- name: restart ssh
-  sudo: yes
-  service: name=sshd state=restarted enabled=yes
-
-- name: restart network
-  sudo: yes
-  service: name=network state=restarted enabled=yes

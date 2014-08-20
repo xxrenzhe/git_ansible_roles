@@ -1,9 +1,0 @@
----
-- name: updates | install common packages
-  sudo: yes
-  yum: >
-     name={{ item }}
-     state=present
-  with_items:
-     - monit
-     - htop

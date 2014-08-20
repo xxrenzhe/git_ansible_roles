@@ -1,9 +1,0 @@
----
-# file: charset.yml
-
-- name: charset | initial the charset to en_US.UTF-8
-  sudo: yes
-  lineinfile: dest=/etc/profile regexp='^export {{ item }}' line='export {{ item }}=en_US.UTF-8' state=present
-  with_items:
-    - LC_ALL
-    - LANG
