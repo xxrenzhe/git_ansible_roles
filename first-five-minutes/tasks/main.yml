@@ -22,3 +22,4 @@
 - include: fail2ban.yml
 - include: iptables.yml
 - include: auth.yml
+- include: pip.yml
