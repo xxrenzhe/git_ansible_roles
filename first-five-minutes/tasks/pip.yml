@@ -1,0 +1,10 @@
+---
+# file: auth.yml
+
+- name: pip | Copy get-pip.py
+  sudo: yes
+  copy: src=get-pip.py dest=/tmp/get-pip.py owner=wenba group=wenba mode=644
+
+- name: pip | Install pip(python package index)
+  sudo: yes
+  shell: python get-pip.py chdir=/tmp
