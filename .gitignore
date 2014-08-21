@@ -54,3 +54,4 @@ docs/_build/
 
 */defaults/*.yml
 */*/defaults/*.yml
+mail.rc
