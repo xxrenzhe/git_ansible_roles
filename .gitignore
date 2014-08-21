@@ -55,3 +55,4 @@ docs/_build/
 # personal information
 */defaults/*.yml
 */*/defaults/*.yml
+mail.rc
