@@ -68,9 +68,29 @@ set bsdcompat
 account zabbix {
 set ssl-verify=ignore
 set nss-config-dir=/etc/pki/nssdb
-set from=xx@oo
-set smtp=xxoo
-set smtp-auth-user=xx@oo 
-set smtp-auth-password=xxoo
+set from=zabbix@wenba100.com
+set smtp=smtps://smtp.exmail.qq.com:465
+set smtp-auth-user=zabbix@wenba100.com 
+set smtp-auth-password=0jcsu1\$dvnyrc01e
+set smtp-auth=login
+}
+
+account fail2ban {
+set ssl-verify=ignore
+set nss-config-dir=/etc/pki/nssdb
+set from=fail2ban@wenba100.com
+set smtp=smtps://smtp.exmail.qq.com:465
+set smtp-auth-user=zabbix@wenba100.com 
+set smtp-auth-password=0jcsu1\$dvnyrc01e
+set smtp-auth=login
+}
+
+account logwatch {
+set ssl-verify=ignore
+set nss-config-dir=/etc/pki/nssdb
+set from=logwatch@wenba100.com
+set smtp=smtps://smtp.exmail.qq.com:465
+set smtp-auth-user=zabbix@wenba100.com 
+set smtp-auth-password=0jcsu1\$dvnyrc01e
 set smtp-auth=login
 }
