@@ -1,0 +1,5 @@
+# file: users.yml
+
+- name: network | Restart the network inmediately
+  sudo: yes
+  service: name=network state=restarted
