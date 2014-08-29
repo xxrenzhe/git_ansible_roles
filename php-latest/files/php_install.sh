@@ -16,6 +16,7 @@ cd $1
 --with-jpeg-dir \
 --with-png-dir \
 --with-zlib \
+--with-curl \
 --with-libxml-dir=/usr \
 --enable-xml \
 --enable-sockets \
