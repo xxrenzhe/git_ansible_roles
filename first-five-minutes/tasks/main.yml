@@ -1,20 +1,15 @@
 ---
 # file: main.yml
 
-- name: Prepare acceleration on all servers
-  sudo: yes
-  yum: name=python-keyczar state=present
-  tags: setup
-
-
+- include: network.yml
+#  when: ansible_default_ipv4.network == "10.9.*.*" and outer_ip == "no"
+- include: restartnetwork.yml
+  when: ansible_default_ipv4.gateway != "10.9.14.140"
 - include: hostname.yml
 - include: charset.yml
 - include: sudo_vim.yml
 - include: selinux.yml
 - include: system.yml
-- include: network.yml
-#  when: ansible_default_ipv4.network == "10.9.*.*" and outer_ip == "no"
-- include: restartnetwork.yml
 - include: updates.yml
 - include: users.yml
 - include: package_directory.yml
@@ -24,3 +19,4 @@
 - include: iptables.yml
 - include: auth.yml
 - include: pip.yml
+- include: remove_initial_scipts.yml

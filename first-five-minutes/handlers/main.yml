@@ -7,3 +7,4 @@
 - name: restart network
   sudo: yes
   service: name=network state=restarted enabled=yes
+  ignore_errors: yes

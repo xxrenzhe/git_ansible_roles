@@ -2,5 +2,5 @@
 
 - name: network | change the gateway to  connect the smtp.exmail.qq.com
   sudo: yes
-  lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-eth0 regexp='^GATEWAY' line='GATEWAY=10.9.14.140' state=present
+  lineinfile: dest=/etc/sysconfig/network-scripts/ifcfg-eth1 regexp='^GATEWAY' line='GATEWAY=10.9.14.140' state=present
   notify: restart network

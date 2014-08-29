@@ -1,0 +1,9 @@
+# file: users.yml
+
+- name: clean | remove initial scipts under /root
+  sudo: yes
+  file: path={{ item }} state=absent
+  with_items:
+    - /root/initialize_server.sh
+    - /root/outer_initialize_server.sh
+  ignore_errors: yes

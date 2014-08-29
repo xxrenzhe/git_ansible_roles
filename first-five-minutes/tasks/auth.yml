@@ -10,3 +10,18 @@
   sudo: yes
   lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no" state=present
   notify: restart ssh
+
+- name: auth | Disallow PasswordAuthentication
+  sudo: yes
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+  notify: restart ssh
+  when: ansible_hostname != "image" and ansible_hostname != "compute-login"
+
+- name: auth | Disallow root SSH access
+  sudo: yes
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^#PubkeyAuthentication" line="PubkeyAuthentication yes" state=present
+  notify: restart ssh
+
+- name: auth | Change SSH Client Connect port
+  sudo: yes
+  lineinfile: dest=/etc/ssh/ssh_config insertafter="^Host" line="Port 9922" state=present

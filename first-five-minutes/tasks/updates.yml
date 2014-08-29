@@ -8,3 +8,4 @@
      - monit
      - htop
      - unzip
+  ignore_errors: yes

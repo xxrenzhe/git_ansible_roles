@@ -3,6 +3,7 @@
 - name: logwatch | install logwatch
   sudo: yes
   yum: name=logwatch state=installed
+  ignore_errors: yes
 
 - name: logwatch | make logwatch mail daily
   sudo: yes

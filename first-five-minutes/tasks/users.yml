@@ -14,13 +14,16 @@
   group: name=wenba state=present
   tags: setup
 
+- name: users | remove user deploy
+  sudo: yes
+  user: name=depoly state=absent
 
 - name: users | add user wenba
   sudo: yes
   user: >
     name={{ ffm_deploy_user }}
     group=wenba
-    password="{{ ffm_deploy_password }}"
+    password="{{ ffm_root_password }}"
     shell=/bin/bash
     state=present
   tags: setup
@@ -38,7 +41,14 @@
   tags : setup
 
 
-- name: users | add deploy_user to sudoers
+#- name: users | add deploy_user to sudoers
+#  sudo: yes
+#  template: src=user.j2 dest=/etc/sudoers.d/{{ ffm_deploy_user }} mode=0440
+#  tags: setup
+
+- name: users | remove deploy_user under sudoers.d
   sudo: yes
-  template: src=user.j2 dest=/etc/sudoers.d/{{ ffm_deploy_user }} mode=0440
-  tags: setup
+  file: path=/etc/sudoers.d/{{ item }} state=absent
+  with_items:
+    - wenba
+    - deploy

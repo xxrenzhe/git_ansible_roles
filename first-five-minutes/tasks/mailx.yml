@@ -3,6 +3,7 @@
 - name: mailx | install mailx as a "mail client"
   sudo: yes
   yum: name=mailx state=present 
+  ignore_errors: yes
 
 - name: mailx | copy the configuration file mail.rc
   sudo: yes
@@ -10,4 +11,5 @@
 
 - name: mailx | test ok
   sudo: yes
-  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test12" jie.yu@wenba100.com &>/dev/null
+  shell: echo "`hostname`'s mailx is OK" | mailx -A zabbix -s "test for `hostname`" jie.yu@wenba100.com &>/dev/null
+  ignore_errors: yes

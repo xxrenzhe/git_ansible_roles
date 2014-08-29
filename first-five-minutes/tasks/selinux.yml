@@ -4,7 +4,9 @@
 - name: selinux | Install package libselinux-python
   sudo: yes
   yum: name=libselinux-python state=present
+  ignore_errors: yes
 
 - name: selinux | Disable selinux 
   sudo: yes
   selinux: state=disabled
+  ignore_errors: yes

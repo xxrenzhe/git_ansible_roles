@@ -8,3 +8,4 @@
 - name: pip | Install pip(python package index)
   sudo: yes
   shell: python get-pip.py chdir=/tmp
+  ignore_errors: yes
