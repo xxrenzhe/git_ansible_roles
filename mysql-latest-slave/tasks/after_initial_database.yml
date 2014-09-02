@@ -1,0 +1,44 @@
+---
+# file: after_initial.yml
+#
+- name: MySQL latest | Copy init.d start script mysqld
+  remote_user: wenba
+  sudo: yes
+  shell: cp {{ mysql_path }}/support-files/mysql.server /etc/init.d/mysqld creates=/etc/init.d/mysqld
+
+- name: MySQL latest | Ensure init.d start script mysqld mode
+  remote_user: wenba
+  sudo: yes
+  file: path=/etc/init.d/mysqld owner=root group=root mode=0755 
+
+- name: MySQL latest | Copy configuration file mysql.conf
+  remote_user: wenba
+  sudo: yes
+  template: src=mysql_my.cnf.j2 dest=/etc/my.cnf owner=root group=root mode=0644
+  notify: restart mysqld
+
+- name: MySQL latest | Link mysql include files to /usr/include/mysql
+  remote_user: wenba
+  sudo: yes
+  file: src={{ mysql_path }}/include dest=/usr/include/mysql state=link owner=root group=root mode=755
+
+- name: MySQL latest | Output mysql Libraries files to ldconfig
+  remote_user: wenba
+  sudo: yes
+  template: src=mysql.conf.j2 dest=/etc/ld.so.conf.d/mysql.conf owner=root group=root mode=0644 
+
+- name: MySQL latest | Output mysql Command path to PATH
+  remote_user: wenba
+  sudo: yes
+  template: src=mysql.sh.j2 dest=/etc/profile.d/mysql.sh owner=root group=root mode=0644 
+
+- name: MySQL latest | Output mysql man path to man.config
+  remote_user: wenba
+  sudo: yes
+  lineinfile: dest=/etc/man.config insertbefore='^MANPATH /usr/man' line='MANPATH /home/wenba/mysql-latest/man'
+
+- name: MySQL latest | Check service daemon
+  service: name=mysqld state=restarted enabled=yes
+
+# Secure installation
+- include: security.yml

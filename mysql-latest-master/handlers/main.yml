@@ -1,0 +1,8 @@
+---
+# File: main.yml
+# Type: handler
+# Part: MySQL
+
+- name: restart mysqld
+  sudo: yes
+  service: name=mysqld state=restarted

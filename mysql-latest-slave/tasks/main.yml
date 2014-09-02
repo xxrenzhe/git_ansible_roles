@@ -1,0 +1,61 @@
+---
+# file: main.yml
+
+- name: MySQL latest | Add group mysql
+  remote_user: wenba
+  sudo: yes
+  group: name=mysql state=present
+
+- name: MySQL latest | Add user mysql
+  remote_user: wenba
+  sudo: yes
+  user: name=mysql shell=/sbin/nologin group=mysql createhome=no state=present
+
+# Install ansible related packages
+- name: MySQL | Install python package
+  yum: name=MySQL-python state=present
+
+- name: MySQL latest | Prepare mysql directory /home/wenba/mysql-version
+  remote_user: wenba
+  file: path={{ item }} owner={{ mysql_user }} group={{ mysql_user }} state=directory recurse=yes
+  with_items:
+    - "{{ mysql_installed_directory }}"
+    - "{{ mysql_data_directory }}"
+    - "{{ mysql_relaylog_directory }}"
+
+- name: MySQL latest | Link mysql to latest version
+  remote_user: wenba
+  sudo: yes
+  file: src={{ mysql_installed_directory }} dest={{ mysql_path }} owner={{ mysql_user }} group={{ mysql_user }} state=link force=yes
+
+- name: MySQL latest | Copy latest mysql original package
+  remote_user: wenba
+  sudo: yes
+  copy: src={{ mysql_latest_package }} dest={{ package_original_directory}}/{{ mysql_latest_package }} owner={{ mysql_user }} group={{ mysql_user }} mode=0644
+  
+- name: MySQL latest | Untar latest mysql package
+  remote_user: wenba
+  sudo: yes
+  shell: /bin/tar zxvf {{ package_original_directory}}/{{ mysql_latest_package }} -C {{ package_untar_directory }} creates={{ package_untar_directory }}/{{ mysql_version }}/VERSION
+
+- name: MySQL latest | Installed latest mysql 
+  remote_user: wenba
+  sudo: yes
+  script: mysql_install.sh {{ package_untar_directory }}/{{ mysql_version }} {{ mysql_path }} {{ mysql_data_directory }} creates={{ mysql_path }}/scripts/mysql_install_db
+
+- name: MySQL latest | Initial MySQL datbase
+  remote_user: wenba
+  sudo: yes
+  debug: msg="You should initialize datbase by your hand ,sh scripts/mysql_install_db --user=wenba --datadir=/data/mysql_data !"
+#  shell: sh scripts/mysql_install_db --user={{ mysql_user }} --datadir={{ mysql_data_directory }} chdir={{ mysql_path }}
+
+- name: MySQL latest | Prepare mysql directory /home/wenba/mysql-version
+  remote_user: wenba
+  file: path={{ item }} owner={{ mysql_user }} group={{ mysql_user }} state=directory recurse=yes
+  with_items:
+    - "{{ mysql_installed_directory }}"
+    - "{{ mysql_data_directory }}"
+    - "{{ mysql_relaylog_directory }}"
+
+# Secure installation
+- include: after_initial_database.yml
