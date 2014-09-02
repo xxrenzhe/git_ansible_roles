@@ -4,7 +4,7 @@
 - name: MySQL latest | Copy init.d start script mysqld
   remote_user: wenba
   sudo: yes
-  shell: cp {{ mysql_path }}/support-files/mysql.server /etc/init.d/mysqld creates=/etc/init.d/mysqld
+  shell: cp {{ mysql_path }}/support-files/mysql.server /etc/init.d/mysqld
 
 - name: MySQL latest | Ensure init.d start script mysqld mode
   remote_user: wenba
