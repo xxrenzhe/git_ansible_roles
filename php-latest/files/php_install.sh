@@ -3,7 +3,7 @@
 # CTime : 2014.08.06
 # Author : Jason.Yu
 
-yum -y install bzip2-devel libmcrypt-devel mhash-devel libxml2 libxml2-devel openssl openssl-devel
+yum -y install bzip2-devel libmcrypt-devel mhash-devel libxml2 libxml2-devel openssl openssl-devel libcurl curl-devel
 cd $1
 ./configure \
 --prefix=$2 \
@@ -27,4 +27,5 @@ cd $1
 --with-config-file-path=/etc \
 --with-config-file-scan-dir=/etc/php.d \
 --with-bz2
-make && make install
+make
+make install

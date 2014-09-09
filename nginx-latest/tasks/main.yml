@@ -36,7 +36,7 @@
 - name: Nginx latest | Untar latest nginx package
   remote_user: wenba
   sudo: yes
-  shell: /bin/tar zxvf {{ package_original_directory}}/{{ nginx_latest_package }} -C {{ package_untar_directory}}
+  shell: /bin/tar zxvf {{ package_original_directory}}/{{ nginx_latest_package }} -C {{ package_untar_directory }}
 
 - name: Nginx latest | Installed latest nginx 
   remote_user: wenba
@@ -59,6 +59,10 @@
   sudo: yes
   template: src=www.conf.j2 dest={{ nginx_latest_installed_directory }}/etc/conf.d/www.conf owner={{ nginx_user }} group={{ nginx_user }} mode=0644
   notify: restart nginx
+
+- name: Nginx latest | Prepare nginx directory /home/wenba/nginx-version
+  remote_user: wenba
+  file: path={{ nginx_installed_directory }} owner={{ nginx_user }} group={{ nginx_user }} state=directory recurse=yes
 
 - name: Nginx latest | Check service daemon
   service: name=nginx state=restarted enabled=yes
